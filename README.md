@@ -1,71 +1,96 @@
-# function-list-side-bar README
 
-This is the README for your extension "function-list-side-bar". After writing up a brief description, we recommend including the following sections.
+# Function List Side Bar
+
+## Description
+
+`function-list-side-bar` is a Visual Studio Code extension that adds a function list to the sidebar. This helps developers quickly navigate to functions and methods in their code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Display a list of all functions and methods in the active file.
+- Navigate to a function or method by clicking on it in the sidebar.
+- Show classes and their methods in a collapsible tree structure.
+- Display tooltips with the function's or method's code snippet.
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Open Visual Studio Code.
+2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or pressing `Ctrl+Shift+X`.
+3. Search for `function-list-side-bar`.
+4. Click `Install` to install the extension.
+5. Reload Visual Studio Code.
+6. Go to `View` > `Appearance` > `Show Secondary Sidebar` to enable the secondary sidebar.
+7. Drag the "Function List" extension to the secondary sidebar.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
 
-## Requirements
+1. Open a file in Visual Studio Code.
+2. The function list will appear in the secondary sidebar under "Function List".
+3. Click on any function or method to navigate to its definition in the code.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Commands
 
-## Extension Settings
+- `functionList.revealRange`: Reveal the function or method in the editor.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Development
 
-For example:
+To set up the extension for development, follow these steps:
 
-This extension contributes the following settings:
+1. Clone the repository:
+   \```sh
+   git clone https://github.com/bonifacemwanza/func-navigator.git
+   cd func-navigator
+   \```
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+2. Install dependencies:
+   \```sh
+   npm install
+   \```
 
-## Known Issues
+3. Compile the extension:
+   \```sh
+   npm run compile
+   \```
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+4. Open the project in Visual Studio Code:
+   \```sh
+   code .
+   \```
 
-## Release Notes
+5. Press `F5` to open a new VS Code window with your extension loaded.
 
-Users appreciate release notes as you update your extension.
+## Publishing
 
-### 1.0.0
+To publish the extension:
 
-Initial release of ...
+1. Ensure you have the `vsce` tool installed:
+   \```sh
+   npm install -g vsce
+   \```
 
-### 1.0.1
+2. Package the extension:
+   \```sh
+   vsce package
+   \```
 
-Fixed issue #.
+3. Login to `vsce` with your publisher name:
+   \```sh
+   vsce login <publisher-name>
+   \```
 
-### 1.1.0
+4. Publish the extension:
+   \```sh
+   vsce publish
+   \```
 
-Added features X, Y, and Z.
+## Contributing
 
----
+Contributions are welcome! Please open an issue or submit a pull request on GitHub.
 
-## Following extension guidelines
+## License
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+## Acknowledgements
 
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Special thanks to the contributors and the VS Code community for their support and feedback.

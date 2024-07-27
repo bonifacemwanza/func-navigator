@@ -1,61 +1,65 @@
 {
   "name": "function-list-side-bar",
-  "displayName": "function list side bar",
+  "displayName": "Function List Side Bar",
   "description": "VS Code extension that adds a function list to the sidebar",
   "version": "0.0.1",
-  "publisher": "Boniface Mwanza",
+  "publisher": "BonifaceMwanza",
   "engines": {
     "vscode": "^1.91.0"
   },
   "categories": [
     "Other"
-],
-"tasks": [
-  {
-    "label": "Open secondary sidebar on folder open",
-    "command": "${command:workbench.action.toggleAuxiliaryBar}", 
-    "runOptions": {
-      "runOn": "folderOpen"
-    },
-    "hide": true
-  }
-],
-"activationEvents": [
+  ],
+  "tasks": [
+    {
+      "label": "Open secondary sidebar on folder open",
+      "command": "${command:workbench.action.toggleAuxiliaryBar}", 
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "hide": true
+    }
+  ],
+  "activationEvents": [
     "onStartupFinished"
-],
-"main": "./out/extension.js",
-"contributes": {
-  "viewsContainers": {
+  ],
+  "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bonifacemwanza/func-navigator"
+  },
+  "contributes": {
+    "viewsContainers": {
       "secondarySidebar": [
-          {
-              "id": "functionList",
-              "title": "Function List",
-              "icon": "./media/icon.png"
-          }
+        {
+          "id": "functionList",
+          "title": "Function List",
+          "icon": "media/icon.png"
+        }
       ],
       "activitybar": [
         {
-            "id": "functionList",
-            "title": "Function List",
-            "icon": "./media/icon.png"
-        }]
-  },
-  "views": {
-      "functionList": [
-          {
-              "id": "functionListView",
-              "name": "Functions"
-          }
+          "id": "functionList",
+          "title": "Function List",
+          "icon": "media/icon.png"
+        }
       ]
-  },
-  "commands": [
+    },
+    "views": {
+      "functionList": [
+        {
+          "id": "functionListView",
+          "name": "Functions"
+        }
+      ]
+    },
+    "commands": [
       {
-          "command": "functionList.revealRange",
-          "title": "Reveal Range"
+        "command": "functionList.revealRange",
+        "title": "Reveal Range"
       }
-  ]
-},
-
+    ]
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

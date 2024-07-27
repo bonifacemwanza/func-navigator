@@ -79,12 +79,16 @@ export class FunctionListProvider implements vscode.TreeDataProvider<TreeItem> {
                 functions.push(new TreeItem(match[1], range, code, 'function'));
             }
         }
+        console.log('Extracted functions:', functions);
+
         // Extract classes and methods within classes
         while ((match = classRegex.exec(text)) !== null) {
             const className = match[1];
             const classBody = match[2];
             const classStartPos = vscode.window.activeTextEditor?.document.positionAt(match.index);
             const classEndPos = vscode.window.activeTextEditor?.document.positionAt(match.index + match[0].length);
+
+            console.log('Matched class body:', classBody);
 
             if (classStartPos && classEndPos) {
                 const classChildren: TreeItem[] = [];
@@ -111,24 +115,27 @@ export class FunctionListProvider implements vscode.TreeDataProvider<TreeItem> {
                         this.extractNestedFunctions(methodBody, methodChildren, methodStartIndex);
                     }
                 }
+                console.log(`Extracted methods for class ${className}:`, classChildren);
+
                 const classItem = new TreeItem(className, classRange, classCode, 'class', classChildren);
                 classes.push(classItem);
             }
         }
+        console.log('Extracted classes:', classes);
 
         return [...functions, ...classes];
     }
 
-    private extractNestedFunctions(body: string, children: TreeItem[], offset: number, depth = 0): void {
+    private extractNestedFunctions(body: string, children: TreeItem[], offset: number, depth=0): void {
         const functionRegex = /function\s+([a-zA-Z0-9_]+)\s*\(/g;
         const maxDepth = 10; // Safeguard against too deep recursion
+
         let match;
 
         if (depth > maxDepth) {
             console.warn('Maximum depth reached for nested function extraction.');
             return;
         }
-
         while ((match = functionRegex.exec(body)) !== null) {
             const functionName = match[1];
             const functionStartIndex = offset + match.index;
@@ -166,5 +173,6 @@ class TreeItem extends vscode.TreeItem {
         };
         this.iconPath = new vscode.ThemeIcon(type === 'class' ? 'symbol-class' : type === 'method' ? 'symbol-method' : 'symbol-function');
         this.description = type === 'class' ? label : `${label}()`;
+        console.log("check children to collapse", children);
     }
 }
