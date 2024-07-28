@@ -2,7 +2,7 @@
   "name": "function-list-side-bar",
   "displayName": "Function List Side Bar",
   "description": "VS Code extension that adds a function list to the sidebar",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "publisher": "BonifaceMwanza",
   "engines": {
     "vscode": "^1.91.0"
@@ -72,5 +72,13 @@
     "typescript": "^5.4.5",
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.4.0"
-  }
+  },
+  "files": [
+    "out",
+    "media",
+    "README.md",
+    "LICENSE"
+  ],  
+  "icon": "media/icon.png"
+
 }
