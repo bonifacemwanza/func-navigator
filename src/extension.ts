@@ -60,7 +60,7 @@ export class FunctionListProvider implements vscode.TreeDataProvider<TreeItem> {
     }
 
     private extractItems(text: string): TreeItem[] {
-        const functionRegex = /function\s+([a-zA-Z0-9_]+)\s*\(/g;
+        const functionRegex = /\b(?:function|const|let)\s+([a-zA-Z0-9_]+)\s*(?:\([^)]*\))?\s*=>|\bfunction\s+([a-zA-Z0-9_]+)\s*\(/g;
         const classRegex = /class\s+([a-zA-Z0-9_]+)\s*(?:extends\s+[a-zA-Z0-9_]+\s*)?(?:implements\s+[a-zA-Z0-9_,\s]+)?\s*\{([\s\S]*?)\n\}/g;
         const methodRegex = /^\s*([a-zA-Z0-9_]+)\s*\(/gm;
 
@@ -71,12 +71,13 @@ export class FunctionListProvider implements vscode.TreeDataProvider<TreeItem> {
 
         // Extract functions
         while ((match = functionRegex.exec(text)) !== null) {
+            const functionName = match[1] || match[2];
             const startPos = vscode.window.activeTextEditor?.document.positionAt(match.index);
             const endPos = vscode.window.activeTextEditor?.document.positionAt(match.index + match[0].length);
             if (startPos && endPos) {
                 const range = new vscode.Range(startPos, endPos);
                 const code = text.split('\n').slice(startPos.line, startPos.line + 5).join('\n');
-                functions.push(new TreeItem(match[1], range, code, 'function'));
+                functions.push(new TreeItem(functionName, range, code, 'function'));
             }
         }
         console.log('Extracted functions:', functions);
@@ -126,8 +127,8 @@ export class FunctionListProvider implements vscode.TreeDataProvider<TreeItem> {
         return [...functions, ...classes];
     }
 
-    private extractNestedFunctions(body: string, children: TreeItem[], offset: number, depth=0): void {
-        const functionRegex = /function\s+([a-zA-Z0-9_]+)\s*\(/g;
+    private extractNestedFunctions(body: string, children: TreeItem[], offset: number, depth = 0): void {
+        const functionRegex = /\bfunction\s+([a-zA-Z0-9_]+)\s*\(/g;
         const maxDepth = 10; // Safeguard against too deep recursion
 
         let match;

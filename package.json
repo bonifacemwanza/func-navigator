@@ -30,18 +30,12 @@
   },
   "contributes": {
     "viewsContainers": {
-      "secondarySidebar": [
-        {
-          "id": "functionList",
-          "title": "Function List",
-          "icon": "media/icon.png"
-        }
-      ],
+  
       "activitybar": [
         {
           "id": "functionList",
           "title": "Function List",
-          "icon": "media/icon.png"
+          "icon": "$(note)"
         }
       ]
     },
